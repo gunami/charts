@@ -73,8 +73,7 @@ class SimpleTimeSeriesChart extends StatefulWidget {
     var time = DateTime.now();
 
     print(time);
-
-    qdata.removeAt(0);
+    if (!qdata.isEmpty) qdata.removeAt(0);
     qdata.add(TimeSeriesSales(time, random.nextInt(100)));
 
     return [
@@ -96,15 +95,13 @@ class _SimpleTimeSeriesChartState extends State<SimpleTimeSeriesChart> {
   @override
   void initState() {
     var time = DateTime.now();
-    widget.qdata.add(new TimeSeriesSales(time, 0));
-    widget.qdata.add(new TimeSeriesSales(time, 0));
-    widget.qdata.add(new TimeSeriesSales(time, 0));
-    widget.qdata.add(new TimeSeriesSales(time, 0));
-    widget.qdata.add(new TimeSeriesSales(time, 0));
-    widget.qdata.add(new TimeSeriesSales(time, 0));
-    widget.qdata.add(new TimeSeriesSales(time, 0));
-    widget.qdata.add(new TimeSeriesSales(time, 0));
-    widget.qdata.add(new TimeSeriesSales(time, 0));
+    var mtime = DateTime.now();
+    for (var i = 60; i >= 0; i--) {
+      mtime = new DateTime(
+          time.year, time.month, time.day, time.hour, time.minute - i);
+      widget.qdata.add(new TimeSeriesSales(mtime, 0));
+    }
+
     Timer timer = Timer.periodic(Duration(seconds: 1), (timer) {
       //data[3] = TimeSeriesSales(time, random.nextInt(100));
       widget.seriesList = widget._update();
