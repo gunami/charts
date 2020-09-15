@@ -24,8 +24,9 @@ import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
 
 class SimpleTimeSeriesChart extends StatefulWidget {
+  final int max_chart_count = 10;
   List<charts.Series> seriesList;
-  bool animate = true;
+  bool animate = false;
   //List<TimeSeriesSales> dataList;
   SimpleTimeSeriesChart(this.seriesList, {this.animate});
   List<TimeSeriesSales> qdata = List();
@@ -73,7 +74,7 @@ class SimpleTimeSeriesChart extends StatefulWidget {
     var time = DateTime.now();
 
     print(time);
-    if (!qdata.isEmpty) qdata.removeAt(0);
+    if (!qdata.isEmpty && qdata.length > max_chart_count) qdata.removeAt(0);
     qdata.add(TimeSeriesSales(time, random.nextInt(100)));
 
     return [
@@ -96,11 +97,6 @@ class _SimpleTimeSeriesChartState extends State<SimpleTimeSeriesChart> {
   void initState() {
     var time = DateTime.now();
     var mtime = DateTime.now();
-    for (var i = 60; i >= 0; i--) {
-      mtime = new DateTime(
-          time.year, time.month, time.day, time.hour, time.minute - i);
-      widget.qdata.add(new TimeSeriesSales(mtime, 0));
-    }
 
     Timer timer = Timer.periodic(Duration(seconds: 1), (timer) {
       //data[3] = TimeSeriesSales(time, random.nextInt(100));
@@ -114,7 +110,7 @@ class _SimpleTimeSeriesChartState extends State<SimpleTimeSeriesChart> {
   Widget build(BuildContext context) {
     return new charts.TimeSeriesChart(
       widget.seriesList,
-      animate: widget.animate,
+      animate: false, //widget.animate,
       // Optionally pass in a [DateTimeFactory] used by the chart. The factory
       // should create the same type of [DateTime] as the data provided. If none
       // specified, the default creates local date time.
