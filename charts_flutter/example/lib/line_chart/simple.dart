@@ -84,8 +84,8 @@ class SimpleLineChart extends StatelessWidget {
       new charts.Series<LinearSales, int>(
         id: 'Sales',
         colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
-        domainFn: (LinearSales sales, _) => sales.year,
-        measureFn: (LinearSales sales, _) => sales.sales,
+        domainFn: (LinearSales sales, _) => 0,
+        measureFn: (LinearSales sales, _) => 0,
         data: data,
       )
     ];

@@ -16,6 +16,8 @@
 import 'package:flutter/material.dart';
 import 'app_config.dart';
 import 'home.dart';
+import 'time_series_chart/simple.dart';
+//import 'package:flutter_localizations/flutter_localizations.dart';
 
 /// The main gallery app widget.
 class GalleryApp extends StatefulWidget {
@@ -35,17 +37,21 @@ class GalleryAppState extends State<GalleryApp> {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-        title: defaultConfig.appName,
-        theme: defaultConfig.theme,
-        showPerformanceOverlay: _showPerformanceOverlay,
-        home: new Home(
-          showPerformanceOverlay: _showPerformanceOverlay,
-          onShowPerformanceOverlayChanged: (bool value) {
-            setState(() {
-              _showPerformanceOverlay = value;
-            });
-          },
-        ));
+      title: defaultConfig.appName,
+      theme: defaultConfig.theme,
+      showPerformanceOverlay: _showPerformanceOverlay,
+      // supportedLocales: [
+      //   const Locale('ko', 'KR'),
+      // ],
+      home: SimpleTimeSeriesChart.withRandomData(),
+      // new Home(
+      //   showPerformanceOverlay: _showPerformanceOverlay,
+      //   onShowPerformanceOverlayChanged: (bool value) {
+      //     setState(() {
+      //       _showPerformanceOverlay = value;
+      //     });
+      //   },
+    );
   }
 }
 

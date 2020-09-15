@@ -30,7 +30,7 @@ List<GalleryScaffold> buildGallery() {
       listTileIcon: new Icon(Icons.show_chart),
       title: 'Time Series Chart',
       subtitle: 'Simple single time series chart',
-      childBuilder: () => new SimpleTimeSeriesChart.withRandomData(),
+      //childBuilder: () => new SimpleTimeSeriesChart.withRandomData(),
     ),
     new GalleryScaffold(
       listTileIcon: new Icon(Icons.show_chart),
